@@ -19,10 +19,11 @@ namespace Sporter.Infrastructure.Validators
                 ValidateLogin(user.Login);                             
                 ValidatePassword(user.Password);
                 ValidateName(user.Name);
-                ValidateSurname(user.Surname);                
+                ValidateSurname(user.Surname);
+                ValidatePhoneNumber(user.PhoneNumber);                
             }
             catch(FormatException ex) 
-            { 
+            {
                 errors.Add(ex.Message);
             }
 
@@ -93,6 +94,22 @@ namespace Sporter.Infrastructure.Validators
             if(!string.IsNullOrWhiteSpace(Surname))
             {
                 var match = Regex.Match(Surname, @"^[a-zA-Z]{1,30}$", RegexOptions.IgnoreCase);
+
+                if (!match.Success)
+                {
+                    throw new FormatException("Please enter a valid Surname.");
+                }
+            } else
+            throw new FormatException("Please enter a Surname.");
+        }
+
+        private void ValidatePhoneNumber (string PhoneNumber)
+        {
+            if(!string.IsNullOrWhiteSpace(PhoneNumber))
+            {
+                var match = Regex.Match(PhoneNumber, @"\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|
+                    2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|
+                    4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$", RegexOptions.IgnoreCase);
 
                 if (!match.Success)
                 {

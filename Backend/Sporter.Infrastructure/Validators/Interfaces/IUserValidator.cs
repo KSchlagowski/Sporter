@@ -5,6 +5,6 @@ namespace Sporter.Infrastructure.Validators.Interfaces
 {
     public interface IUserValidator
     {
-        public List<string> Validate(User user);
+        List<string> Validate(User user);
     }
 }
