@@ -1,3 +1,5 @@
+using System;
+
 namespace Sporter.Core.Models
 {
     public class ItemModel
