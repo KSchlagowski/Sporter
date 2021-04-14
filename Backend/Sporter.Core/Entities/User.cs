@@ -12,6 +12,6 @@ namespace Sporter.Core.Entities
         public string Email { get; set; }
         public string Login { get; set; }
         public byte[] Password { get; set; }
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }
