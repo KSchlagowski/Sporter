@@ -3,7 +3,7 @@ main {
   justify-content: center;
   margin-left: 40px;
   margin-right: 40px;
-  margin-top: 40px;
+  margin-top: 100px;
 }
 .category {
   width: 120%;
@@ -19,7 +19,8 @@ main {
   transition: all 1s;
 }
 .photos {
-  margin-left: 40px;
+  margin-left: 380px;
+  margin-right: 20px;
 }
 #photos {
   object-fit: cover;

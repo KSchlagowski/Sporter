@@ -5,7 +5,7 @@ import ArrowRight from "../components/arrowRight";
 import image from "../photos/shoes.jpg";
 import image2 from "../photos/shoes2.jpg";
 import image3 from "../photos/shoes3.jpg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 export default function SideBar() {
   const [currentPhoto, setcurrentPhoto] = useState(0);
   let opacity = 0;
@@ -32,13 +32,27 @@ export default function SideBar() {
       }
     }, 7);
   }
+  let positionX=-300
+  function moveRight(){
+    const moveRight=setInterval(()=>{
+      positionX=positionX+2
+      document.querySelector(".sideBar").style.left=positionX+"px"
+      if(positionX===60){
+        clearInterval(moveRight)
+      }
+    },1)
+  }
 
-InreaseOpacity()
+useEffect(()=>{
+  InreaseOpacity()
+  moveRight()
+},[])
+
   return (
     <>
       <main>
-        <Navbar
-          style={{ width: "300px", maxHeight: "650px" }}
+        <Navbar className="sideBar"
+          style={{ width: "300px", maxHeight: "650px",position:"absolute",left:"-300px" }}
           bg="dark"
           variant="dark"
         >
