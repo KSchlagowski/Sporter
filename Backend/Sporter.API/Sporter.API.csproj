@@ -1,16 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3"/>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.6"/>
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\Sporter.Application\Sporter.Application.csproj" />
-    <ProjectReference Include="..\Sporter.Infrastructure\Sporter.Infrastructure.csproj" />
+    <ProjectReference Include="..\Sporter.Application\Sporter.Application.csproj"/>
+    <ProjectReference Include="..\Sporter.Infrastructure\Sporter.Infrastructure.csproj"/>
   </ItemGroup>
-
 </Project>
