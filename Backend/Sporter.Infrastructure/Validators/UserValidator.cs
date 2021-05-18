@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using Sporter.Core.Entities;
+using Sporter.Domain.Entities;
 using Sporter.Infrastructure.Validators.Interfaces;
 
 namespace Sporter.Infrastructure.Validators

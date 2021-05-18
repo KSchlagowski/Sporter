@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Sporter.Core.Entities;
+using Sporter.Domain.Entities;
 
 namespace Sporter.Infrastructure.Validators.Interfaces
 {

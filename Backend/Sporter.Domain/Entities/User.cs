@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Sporter.Core.Entities
+namespace Sporter.Domain.Entities
 {
     public class User
     {

@@ -1,4 +1,4 @@
-namespace Sporter.Core.Models
+namespace Sporter.Domain.Models
 {
     public class UserModel
     {

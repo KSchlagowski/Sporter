@@ -1,6 +1,6 @@
 using System;
 
-namespace Sporter.Core.Models
+namespace Sporter.Domain.Models
 {
     public class ItemModel
     {
