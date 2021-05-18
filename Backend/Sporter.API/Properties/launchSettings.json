@@ -4,8 +4,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:36226",
-      "sslPort": 44367
+      "applicationUrl": "http://localhost:57854",
+      "sslPort": 44383
     }
   },
   "profiles": {
@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Sporter.Web": {
+    "Sporter.API": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

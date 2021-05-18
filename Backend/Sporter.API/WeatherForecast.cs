@@ -1,6 +1,6 @@
 using System;
 
-namespace Sporter.Web
+namespace Sporter.API
 {
     public class WeatherForecast
     {

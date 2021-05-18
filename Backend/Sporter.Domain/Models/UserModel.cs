@@ -1,4 +1,4 @@
-namespace Sporter.Core.Models
+namespace Sporter.Domain.Models
 {
     public class UserModel
     {
@@ -6,6 +6,6 @@ namespace Sporter.Core.Models
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Fullname { get => $"{Name} {Surname}"; }
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

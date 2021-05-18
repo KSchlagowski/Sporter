@@ -1,4 +1,6 @@
-namespace Sporter.Core.Models
+using System;
+
+namespace Sporter.Domain.Models
 {
     public class ItemModel
     {

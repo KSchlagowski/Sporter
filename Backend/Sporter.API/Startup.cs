@@ -11,8 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Sporter.Application;
+using Sporter.Infrastructure;
 
-namespace Sporter.Web
+namespace Sporter.API
 {
     public class Startup
     {
@@ -30,8 +32,11 @@ namespace Sporter.Web
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sporter.Web", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sporter.API", Version = "v1" });
             });
+
+            services.AddApplication();
+            services.AddInfrastructure();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +46,7 @@ namespace Sporter.Web
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sporter.Web v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sporter.API v1"));
             }
 
             app.UseHttpsRedirection();
