@@ -13,6 +13,7 @@ namespace Sporter.Domain.Models
         public DateTime PublishDate { get; set; }
         public DateTime ExpireDate { get; set; }
         public int BuyerId { get; set; }
+        public bool IsAvailable { get; set; }
 
         public virtual AuctionModel Auction { get; set; }
     }
