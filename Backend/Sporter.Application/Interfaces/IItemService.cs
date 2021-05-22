@@ -1,10 +1,11 @@
 using System.Linq;
 using Sporter.Domain.Models;
 
-namespace Sporter.Domain.Interfaces
+namespace Sporter.Application.Interfaces
 {
-    public interface IItemRepository
+    public interface IItemService
     {
+        string GetJsonTEST();
         ItemModel GetItemById(int itemId);
         ItemModel GetItemByBuyerId(int buyerId);
         IQueryable<ItemModel> GetAllActiveItems();
@@ -13,7 +14,7 @@ namespace Sporter.Domain.Interfaces
         IQueryable<ItemModel> GetItemsByCity(string city);
         IQueryable<ItemModel> GetItemsBelowPrice(decimal maxPrice);
         IQueryable<ItemModel> GetItemsAbovePrice(decimal minPrice);
-        int AddItem(ItemModel item);
+        int AddItem(string itemJson);
         int UpdateItem(ItemModel item);
         int DeleteItem(int itemId);
     }

@@ -11,6 +11,30 @@ namespace Sporter.Infrastructure.Repositories
         public ItemRepository(Context context) =>
             _context = context;
 
+        public int AddItem(ItemModel item)
+        {
+            _context.ItemModels.Add(item);
+            _context.SaveChanges();
+            return item.Id;
+        }
+
+        public int DeleteItem(int itemId)
+        {
+            var result = _context.ItemModels.SingleOrDefault(i => i.Id == itemId && i.IsAvailable);
+
+            if (result != null)
+            {
+                var item = result;
+                item.IsAvailable = false;
+                _context.Entry(result).CurrentValues.SetValues(item);
+                _context.SaveChanges();
+
+                return itemId;
+            }
+
+            return -1;
+        }
+
         public IQueryable<ItemModel> GetAllActiveItems() =>
             _context.ItemModels.Where(i => i.IsAvailable);
 
@@ -34,5 +58,20 @@ namespace Sporter.Infrastructure.Repositories
 
         public IQueryable<ItemModel> GetItemsByCoutry(string country) =>
             _context.ItemModels.Where(i => i.Country == country && i.IsAvailable);
+
+        public int UpdateItem(ItemModel item)
+        {
+            var result = _context.ItemModels.SingleOrDefault(i => i.Id == item.Id && i.IsAvailable);
+
+            if (result != null)
+            {
+                _context.Entry(result).CurrentValues.SetValues(item);
+                _context.SaveChanges();
+
+                return item.Id;
+            }
+
+            return -1;
+        }
     }
 }

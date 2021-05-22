@@ -6,9 +6,9 @@ namespace Sporter.Infrastructure
 {
     public class Context : IdentityDbContext
     {
-        // public Context(DbContextOptions options) : base(options)
-        // {
-        // }
+        public Context(DbContextOptions options) : base(options)
+        {
+        }
 
         public DbSet<UserModel> UserModels { get; set; }
         public DbSet<AuctionModel> AuctionModels { get; set; }
@@ -28,6 +28,10 @@ namespace Sporter.Infrastructure
 
             modelBuilder.Entity<ItemModel>()
                 .HasKey(i => i.Id);
+
+            modelBuilder.Entity<ItemModel>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(18,4)");
 
             modelBuilder.Entity<AuctionModel>()
                 .HasKey(it => new { it.UserId, it.ItemId });
