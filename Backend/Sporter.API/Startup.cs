@@ -43,6 +43,12 @@ namespace Sporter.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sporter.API", Version = "v1" });
             });
 
+            services.AddMemoryCache(); //
+            services.AddControllersWithViews(); //
+            services.AddControllers()
+                .AddControllersAsServices(); //
+            services.AddHttpClient(); //
+
             services.AddApplication();
             services.AddInfrastructure();
         }

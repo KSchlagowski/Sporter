@@ -1,7 +1,9 @@
 using System;
+using System.Text.Json.Serialization;
 
 namespace Sporter.Domain.Models
 {
+    [Serializable]
     public class ItemModel
     {
         public int Id { get; set; }
@@ -15,6 +17,7 @@ namespace Sporter.Domain.Models
         public int BuyerId { get; set; }
         public bool IsAvailable { get; set; }
 
+        [JsonIgnore]
         public virtual AuctionModel Auction { get; set; }
     }
 }
