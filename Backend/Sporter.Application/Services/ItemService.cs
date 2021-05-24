@@ -24,14 +24,49 @@ namespace Sporter.Application.Services
             return _itemRepo.AddItem(item);
         }
 
-        public int DeleteItem(int itemId)
+        public int AddItem(Item item)
         {
-            return _itemRepo.DeleteItem(itemId);
+            _itemRepo.AddItem(item);
+            return item.Id;
         }
 
-        public IQueryable<Item> GetAllActiveItems()
+        public int AddItemInJson(string itemJson)
         {
-            return _itemRepo.GetAllActiveItems();
+            var item = _jsonService.DeserializeFromJson<Item>(itemJson);
+            return AddItem(item);
+        }
+
+        public void DeleteItem(int itemId)
+        {
+            _itemRepo.DeleteItem(itemId);
+        }
+
+        public void DeleteItemAbsolute(int itemId)
+        {
+            _itemRepo.DeleteItemAbsolute(itemId);
+        }
+
+        public List<Item> GetAllItems()
+        {
+            return _itemRepo.GetAllActiveItems().ToList();
+        }
+
+        public List<Item> GetAllItems(int pageSize, int pageNo, string searchString)
+        {
+            var items = _itemRepo.GetAllActiveItems().Where(p => p.Name.StartsWith(searchString));
+            var itemsToShow = items.Skip(pageSize*(pageNo - 1)).Take(pageSize).ToList();
+
+            return itemsToShow;
+        }
+
+        public string GetAllItemsInJson()
+        {
+            return _jsonService.SerializeToJson(GetAllItems());
+        }
+
+        public string GetAllItemsInJson(int pageSize, int pageNo, string searchString)
+        {
+            return _jsonService.SerializeToJson(GetAllItems(pageSize, pageNo, searchString));
         }
 
         public Item GetItemByBuyerId(int buyerId)

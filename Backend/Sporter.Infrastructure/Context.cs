@@ -19,7 +19,7 @@ namespace Sporter.Infrastructure
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=SporterDevelopment2;");
+            optionsBuilder.UseSqlServer("Server=localhost;Database=SporterDevelopment3;");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

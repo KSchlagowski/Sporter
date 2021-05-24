@@ -14,7 +14,8 @@ namespace Sporter.Domain.Interfaces
         IQueryable<Item> GetItemsBelowPrice(decimal maxPrice);
         IQueryable<Item> GetItemsAbovePrice(decimal minPrice);
         int AddItem(Item item);
-        int UpdateItem(Item item);
-        int DeleteItem(int itemId);
+        void UpdateItem(Item item);
+        void DeleteItem(int itemId);
+        void DeleteItemAbsolute(int itemId);
     }
 }

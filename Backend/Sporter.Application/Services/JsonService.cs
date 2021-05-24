@@ -20,9 +20,9 @@ namespace Sporter.Application.Services
         public string SerializeToJson<T>(T objectToSerialize)
         {
             string serializedObject = JsonConvert.SerializeObject(objectToSerialize);
-            JObject json = JObject.Parse(serializedObject);
+            JObject jObject = JObject.Parse(serializedObject);
 
-            if (_validator.ValidateJson<T>(json))
+            if (_validator.ValidateJson<T>(jObject))
             {
                 return serializedObject;
             }
