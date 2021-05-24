@@ -1,10 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Sporter.Domain.Models
 {
     [Serializable]
-    public class ItemModel
+    public class Item
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -18,6 +19,8 @@ namespace Sporter.Domain.Models
         public bool IsAvailable { get; set; }
 
         [JsonIgnore]
-        public virtual AuctionModel Auction { get; set; }
+        public virtual ICollection<ItemTag> ItemTags { get; set; }
+        public int ClientId { get; set; }
+        public Client Client { get; set; }
     }
 }

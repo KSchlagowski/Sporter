@@ -20,7 +20,7 @@ namespace Sporter.API.Controllers
         public IActionResult JsonResult()
         {
             var jsonS = new JsonService(new JsonValidator());
-            var a = jsonS.SerializeToJson(new Domain.Models.ItemModel());
+            var a = jsonS.SerializeToJson(new Domain.Models.Item());
             return new JsonResult(a);
         }
 

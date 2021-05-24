@@ -9,9 +9,7 @@ namespace Sporter.Domain.Models
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Fullname { get => $"{Name} {Surname}"; }
-        public string PhoneNumber { get; set; }
+       
         public bool IsActive { get; set; }
-
-        public ICollection<AuctionModel> Auctions { get; set; }
     }
 }

@@ -6,49 +6,57 @@ namespace Sporter.Infrastructure
 {
     public class Context : IdentityDbContext
     {
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<ClientContactInformation> ClientContactInformations { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<ItemTag> ItemTag { get; set; }
+        public DbSet<Tag> Tags { get; set; }        
+
         public Context(DbContextOptions options) : base(options)
         {
         }
 
-        public DbSet<UserModel> UserModels { get; set; }
-        public DbSet<AuctionModel> AuctionModels { get; set; }
-        public DbSet<ItemModel> ItemModels { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=SporterDevelopment;User Id=sa;Password=Localhost1;");
+            optionsBuilder.UseSqlServer("Server=localhost;Database=SporterDevelopment2;");
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(builder);
 
-            modelBuilder.Entity<UserModel>()
-                .HasKey(u => u.Id);
+            builder.Entity<Client>()
+                .HasOne(a => a.ClientContactInformation)
+                .WithOne(b => b.Client)
+                .HasForeignKey<ClientContactInformation>(e => e.ClientId);
+            
+            builder.Entity<Client>()
+                .HasMany(c => c.Addresses)
+                .WithOne(a => a.Client)
+                .HasForeignKey(e => e.ClientId);
+            
+            builder.Entity<Client>()
+                .HasMany(c => c.Items)
+                .WithOne(i => i.Client)
+                .HasForeignKey(e => e.ClientId);
 
-            modelBuilder.Entity<ItemModel>()
-                .HasKey(i => i.Id);
-
-            modelBuilder.Entity<ItemModel>()
-                .Property(p => p.Price)
+            builder.Entity<Item>()
+                .Property(i => i.Price)
                 .HasColumnType("decimal(18,4)");
 
-            modelBuilder.Entity<AuctionModel>()
-                .HasKey(it => new { it.UserId, it.ItemId });
+            builder.Entity<ItemTag>()
+                .HasKey(it => new { it.ItemId, it.TagId });
 
+            builder.Entity<ItemTag>()
+                .HasOne<Item>(it => it.Item)
+                .WithMany(i => i.ItemTags)
+                .HasForeignKey(it => it.ItemId);
 
-            modelBuilder.Entity<AuctionModel>()
-                .HasOne(a => a.User)
-                .WithMany(u => u.Auctions)
-                .HasForeignKey(a => a.UserId);
-
-            modelBuilder.Entity<AuctionModel>()
-                .HasOne(a => a.Item)
-                .WithOne(u => u.Auction)
-                .HasForeignKey<AuctionModel>(a => a.ItemId);
-
-           
-
+            builder.Entity<ItemTag>()
+                .HasOne<Tag>(it => it.Tag)
+                .WithMany(t => t.ItemTags)
+                .HasForeignKey(it => it.TagId);
         }
     }
 }

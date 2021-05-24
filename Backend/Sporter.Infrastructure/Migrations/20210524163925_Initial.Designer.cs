@@ -10,8 +10,8 @@ using Sporter.Infrastructure;
 namespace Sporter.Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210518173541_Add_IsActive_To_UserModels")]
-    partial class Add_IsActive_To_UserModels
+    [Migration("20210524163925_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -164,10 +164,12 @@ namespace Sporter.Infrastructure.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -204,10 +206,12 @@ namespace Sporter.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -217,23 +221,90 @@ namespace Sporter.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Sporter.Domain.Models.AuctionModel", b =>
+            modelBuilder.Entity("Sporter.Domain.Models.Address", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BuildingNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId", "ItemId");
+                    b.Property<string>("FlatNumber")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("ItemId")
-                        .IsUnique();
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("AuctionModels");
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("Sporter.Domain.Models.ItemModel", b =>
+            modelBuilder.Entity("Sporter.Domain.Models.Client", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("Sporter.Domain.Models.ClientContactInformation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId")
+                        .IsUnique();
+
+                    b.ToTable("ClientContactInformations");
+                });
+
+            modelBuilder.Entity("Sporter.Domain.Models.Item", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -249,6 +320,9 @@ namespace Sporter.Infrastructure.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
@@ -262,41 +336,46 @@ namespace Sporter.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<DateTime>("PublishDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ItemModels");
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("Items");
                 });
 
-            modelBuilder.Entity("Sporter.Domain.Models.UserModel", b =>
+            modelBuilder.Entity("Sporter.Domain.Models.ItemTag", b =>
+                {
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ItemId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("ItemTag");
+                });
+
+            modelBuilder.Entity("Sporter.Domain.Models.Tag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserModels");
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -350,33 +429,75 @@ namespace Sporter.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Sporter.Domain.Models.AuctionModel", b =>
+            modelBuilder.Entity("Sporter.Domain.Models.Address", b =>
                 {
-                    b.HasOne("Sporter.Domain.Models.ItemModel", "Item")
-                        .WithOne("Auction")
-                        .HasForeignKey("Sporter.Domain.Models.AuctionModel", "ItemId")
+                    b.HasOne("Sporter.Domain.Models.Client", "Client")
+                        .WithMany("Addresses")
+                        .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Sporter.Domain.Models.UserModel", "User")
-                        .WithMany("Auctions")
-                        .HasForeignKey("UserId")
+                    b.Navigation("Client");
+                });
+
+            modelBuilder.Entity("Sporter.Domain.Models.ClientContactInformation", b =>
+                {
+                    b.HasOne("Sporter.Domain.Models.Client", "Client")
+                        .WithOne("ClientContactInformation")
+                        .HasForeignKey("Sporter.Domain.Models.ClientContactInformation", "ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Client");
+                });
+
+            modelBuilder.Entity("Sporter.Domain.Models.Item", b =>
+                {
+                    b.HasOne("Sporter.Domain.Models.Client", "Client")
+                        .WithMany("Items")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Client");
+                });
+
+            modelBuilder.Entity("Sporter.Domain.Models.ItemTag", b =>
+                {
+                    b.HasOne("Sporter.Domain.Models.Item", "Item")
+                        .WithMany("ItemTags")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Sporter.Domain.Models.Tag", "Tag")
+                        .WithMany("ItemTags")
+                        .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Item");
 
-                    b.Navigation("User");
+                    b.Navigation("Tag");
                 });
 
-            modelBuilder.Entity("Sporter.Domain.Models.ItemModel", b =>
+            modelBuilder.Entity("Sporter.Domain.Models.Client", b =>
                 {
-                    b.Navigation("Auction");
+                    b.Navigation("Addresses");
+
+                    b.Navigation("ClientContactInformation");
+
+                    b.Navigation("Items");
                 });
 
-            modelBuilder.Entity("Sporter.Domain.Models.UserModel", b =>
+            modelBuilder.Entity("Sporter.Domain.Models.Item", b =>
                 {
-                    b.Navigation("Auctions");
+                    b.Navigation("ItemTags");
+                });
+
+            modelBuilder.Entity("Sporter.Domain.Models.Tag", b =>
+                {
+                    b.Navigation("ItemTags");
                 });
 #pragma warning restore 612, 618
         }

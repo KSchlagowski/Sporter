@@ -5,16 +5,16 @@ namespace Sporter.Domain.Interfaces
 {
     public interface IItemRepository
     {
-        ItemModel GetItemById(int itemId);
-        ItemModel GetItemByBuyerId(int buyerId);
-        IQueryable<ItemModel> GetAllActiveItems();
-        IQueryable<ItemModel> GetItemsByCategory(string category);
-        IQueryable<ItemModel> GetItemsByCoutry(string country);
-        IQueryable<ItemModel> GetItemsByCity(string city);
-        IQueryable<ItemModel> GetItemsBelowPrice(decimal maxPrice);
-        IQueryable<ItemModel> GetItemsAbovePrice(decimal minPrice);
-        int AddItem(ItemModel item);
-        int UpdateItem(ItemModel item);
+        Item GetItemById(int itemId);
+        Item GetItemByBuyerId(int buyerId);
+        IQueryable<Item> GetAllActiveItems();
+        IQueryable<Item> GetItemsByCategory(string category);
+        IQueryable<Item> GetItemsByCoutry(string country);
+        IQueryable<Item> GetItemsByCity(string city);
+        IQueryable<Item> GetItemsBelowPrice(decimal maxPrice);
+        IQueryable<Item> GetItemsAbovePrice(decimal minPrice);
+        int AddItem(Item item);
+        int UpdateItem(Item item);
         int DeleteItem(int itemId);
     }
 }
