@@ -6,16 +6,16 @@ namespace Sporter.Application.Interfaces
     public interface IItemService
     {
         string GetJsonTEST();
-        ItemModel GetItemById(int itemId);
-        ItemModel GetItemByBuyerId(int buyerId);
-        IQueryable<ItemModel> GetAllActiveItems();
-        IQueryable<ItemModel> GetItemsByCategory(string category);
-        IQueryable<ItemModel> GetItemsByCoutry(string country);
-        IQueryable<ItemModel> GetItemsByCity(string city);
-        IQueryable<ItemModel> GetItemsBelowPrice(decimal maxPrice);
-        IQueryable<ItemModel> GetItemsAbovePrice(decimal minPrice);
+        Item GetItemById(int itemId);
+        Item GetItemByBuyerId(int buyerId);
+        IQueryable<Item> GetAllActiveItems();
+        IQueryable<Item> GetItemsByCategory(string category);
+        IQueryable<Item> GetItemsByCoutry(string country);
+        IQueryable<Item> GetItemsByCity(string city);
+        IQueryable<Item> GetItemsBelowPrice(decimal maxPrice);
+        IQueryable<Item> GetItemsAbovePrice(decimal minPrice);
         int AddItem(string itemJson);
-        int UpdateItem(ItemModel item);
+        int UpdateItem(Item item);
         int DeleteItem(int itemId);
     }
 }
