@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Sporter.Application.Interfaces;
 using Sporter.Application.Services;
 using Sporter.Application.Validators.Json;
@@ -6,44 +7,55 @@ using System.Web;
 
 namespace Sporter.API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
+    // [ApiController]
+    // [Route("api/[controller]")]
     public class ItemController : Controller
     {
+        private readonly ILogger<ItemController> _logger;
         private readonly IItemService _itemService;
 
-        public ItemController(IItemService itemService)
+        public ItemController(ILogger<ItemController> logger, IItemService itemService)
         {
+            _logger = logger;
             _itemService = itemService;
         }
 
-        public IActionResult JsonResult()
-        {
-            var jsonS = new JsonService(new JsonValidator());
-            var a = jsonS.SerializeToJson(new Domain.Models.Item());
-            return new JsonResult(a);
-        }
+        [HttpGet]
+        public void Index() 
+        { 
+            _logger.LogInformation("I am in Index");
+        } 
+
+
 
         [HttpGet]
-        [Route("value")]
         public IActionResult GetItem()
         {
             return new JsonResult(_itemService.GetJsonTEST());
         }
 
-        [HttpGet]
-        [Route("index")]
-        public void Index() 
-        { 
-            _itemService.DeleteItem(2); 
-        } 
+        // [HttpGet]
+        // public IActionResult GetAllItems()
+        // {
+
+        //}
+
+
 
         
-        [Route("additem/{itemJson}")]
+        //[Route("additem/{itemJson}")]
         [HttpPost]
         public int AddItem([FromHeader] string itemJson) 
         { 
-            return _itemService.AddItem(itemJson); 
+            return _itemService.AddItemInJson(itemJson); 
         } 
+
+        //Action for front-end developers
+        public IActionResult GetSampleJsonOfItem()
+        {
+            var jsonS = new JsonService(new JsonValidator());
+            var a = jsonS.SerializeToJson(new Domain.Models.Item());
+            return new JsonResult(a);
+        }
     }
 }
