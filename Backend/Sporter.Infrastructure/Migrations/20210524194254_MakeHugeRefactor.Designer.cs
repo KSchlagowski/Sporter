@@ -10,8 +10,8 @@ using Sporter.Infrastructure;
 namespace Sporter.Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210524163925_Initial")]
-    partial class Initial
+    [Migration("20210524194254_MakeHugeRefactor")]
+    partial class MakeHugeRefactor
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

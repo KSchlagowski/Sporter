@@ -18,7 +18,7 @@ namespace Sporter.Infrastructure.Repositories
             return item.Id;
         }
 
-        public int DeleteItem(int itemId)
+        public void DeleteItem(int itemId)
         {
             var result = _context.Items.SingleOrDefault(i => i.Id == itemId && i.IsAvailable);
 
@@ -28,11 +28,14 @@ namespace Sporter.Infrastructure.Repositories
                 item.IsAvailable = false;
                 _context.Entry(result).CurrentValues.SetValues(item);
                 _context.SaveChanges();
-
-                return itemId;
             }
+        }
 
-            return -1;
+        public void DeleteItemAbsolute(int itemId)
+        {
+            var item = _context.Items.Find(itemId);
+            _context.Items.Remove(item);
+            _context.SaveChanges();
         }
 
         public IQueryable<Item> GetAllActiveItems() =>
@@ -59,19 +62,18 @@ namespace Sporter.Infrastructure.Repositories
         public IQueryable<Item> GetItemsByCoutry(string country) =>
             _context.Items.Where(i => i.Country == country && i.IsAvailable);
 
-        public int UpdateItem(Item item)
+        public void UpdateItem(Item item)
         {
-            var result = _context.Items.SingleOrDefault(i => i.Id == item.Id && i.IsAvailable);
+            _context.Attach(item);
+            _context.Entry(item).Property("Name").IsModified = true;
+            _context.Entry(item).Property("Category").IsModified = true;
+            _context.Entry(item).Property("Price").IsModified = true;
+            _context.Entry(item).Property("Country").IsModified = true;
+            _context.Entry(item).Property("City").IsModified = true;
+            _context.Entry(item).Property("ExpireDate").IsModified = true;
+            _context.Entry(item).Property("BuyerId").IsModified = true;
 
-            if (result != null)
-            {
-                _context.Entry(result).CurrentValues.SetValues(item);
-                _context.SaveChanges();
-
-                return item.Id;
-            }
-
-            return -1;
+            _context.SaveChanges();
         }
     }
 }
