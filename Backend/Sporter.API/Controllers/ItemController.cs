@@ -53,9 +53,9 @@ namespace Sporter.API.Controllers
         //Action for front-end developers
         public IActionResult GetSampleJsonOfItem()
         {
-            var jsonS = new JsonService(new JsonValidator());
-            var a = jsonS.SerializeToJson(new Domain.Models.Item());
-            return new JsonResult(a);
+            var jsonService = new JsonService(new JsonValidator());
+            var json = jsonService.SerializeToJson(new Domain.Models.Item());
+            return new JsonResult(json);
         }
     }
 }

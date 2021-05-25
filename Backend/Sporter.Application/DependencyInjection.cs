@@ -10,10 +10,10 @@ namespace Sporter.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            //services.AddTransient<ItemService>(new ItemService());
+            services.AddTransient<IClientService, ClientService>();
+            services.AddTransient<IClientJsonService, ClientJsonService>();
             services.AddTransient<IItemService, ItemService>();
             services.AddTransient<IJsonService, JsonService>();
-            // services.AddTransient<IUserService, UserService>();
             services.AddTransient<IJsonValidator, JsonValidator>();
 
             return services;
