@@ -55,8 +55,12 @@ namespace Sporter.Infrastructure.Repositories
         public void DeleteClientAbsolute(int clientId)
         {
             var client = _context.Clients.Find(clientId);
-            _context.Clients.Remove(client);
-            _context.SaveChanges();
+            
+            if (client != null)
+            {
+                _context.Clients.Remove(client);
+                _context.SaveChanges();
+            }
         }
 
         public void DeleteClientContactInformation(int contactInformationId)

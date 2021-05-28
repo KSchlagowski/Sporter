@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Sporter.Application.Interfaces;
 using Sporter.Application.Services;
 using Sporter.Application.Validators.Json;
+using Sporter.Application.ViewModels.Client;
 using System.Web;
 
 namespace Sporter.API.Controllers
@@ -10,61 +11,167 @@ namespace Sporter.API.Controllers
     public class ClientController : Controller
     {
         private readonly ILogger<ItemController> _logger;
-        private readonly IClientJsonService _clientJsonService;
+        private readonly IClientService _clientService;
 
-        public ClientController(ILogger<ItemController> logger, IClientJsonService clientJsonService)
+        public ClientController(ILogger<ItemController> logger, IClientService clientService)
         {
             _logger = logger;
-            _clientJsonService = clientJsonService;
+            _clientService = clientService;
         }
 
         [HttpGet]
-        public IActionResult GetClientInJson(int clientId)
+        public IActionResult GetClient(int clientId)
         {
-            var json = _clientJsonService.GetClientInJson(clientId);
-            return new JsonResult(json);
+            var client = _clientService.GetClient(clientId);
+            return View(client);
         }
 
-        // public IActionResult GetAllClientsInJson()
-        // {
+        [HttpGet]
+        public IActionResult GetAllClients()
+        {
+            var clients = _clientService.GetAllClients();
+            return new JsonResult(clients);
+        }
+
+        [HttpGet]
+        public IActionResult GetAllClients(int pageSize, int pageNo, string searchString)
+        {
+            var clients = _clientService.GetAllClients(pageSize, pageNo, searchString);
+            return new JsonResult(clients);
+        }
+
+        [HttpGet]
+        public IActionResult GetClientDetails(int clientId)
+        {
+            var clientDetails = _clientService.GetClientDetails(clientId);
+            return new JsonResult(clientDetails);
+        }
+
+        [HttpGet]
+        public IActionResult AddClient()
+        {
+            return new JsonResult(new NewClientVm());
+        }
+
+        [HttpPost]
+        public IActionResult AddClient([FromBody] NewClientVm model)
+        {
+            if (ModelState.IsValid)
+            {
+                var id = _clientService.AddClient(model);
+
+                return new JsonResult(id);
+            }
             
-        // }
+            return new JsonResult("Invalid model");
+        }
 
-        // public IActionResult GetAllClientsInJson(int pageSize, int pageNo, string searchString)
-        // {
+        [HttpGet]
+        public IActionResult AddClientContactInformation()
+        {
+            return new JsonResult(new NewClientContactInformationVm());
+        }
 
-        // }
-        // public IActionResult GetClientContactInformationInJson(int contactInformationId)
-        // {
+        [HttpPost]
+        public IActionResult AddClientContactInformation(NewClientContactInformationVm model)
+        {
+            var id = _clientService.AddClientContactInformation(model);
+            return new JsonResult(id);
+        }
 
-        // }
-        // public IActionResult GetAddressInJson(int addressId)
-        // {
+        [HttpGet]
+        public IActionResult AddAddress()
+        {
+            return View(new NewAddressVm());
+        }
 
-        // }
-        // public IActionResult AddClientInJson(string clientJson)
-        // {
+        [HttpPost]
+        public IActionResult AddAddress(NewAddressVm model)
+        {
+            var id = _clientService.AddAddress(model);
+            return new JsonResult(id);
+        }
 
-        // }
-        // public IActionResult AddClientContactInforamtionInJson(string contactJson)
-        // {
+        [HttpGet]
+        public IActionResult EditClient(int id)
+        {
+            var client = _clientService.GetClientForEdit(id);
+            return new JsonResult(client);
+        }
 
-        // }
-        // public IActionResult AddAddressInJson(string addressJson)
-        // {
+        [HttpPost]
+        public IActionResult EditClient(NewClientVm model)
+        {
+            if (ModelState.IsValid)
+            {
+                _clientService.UpdateClient(model);
+            }
 
-        // }
-        // public IActionResult UpdateClientInJson(string clientJson)
-        // {
+            return new JsonResult(model);
+        }
 
-        // }
-        // public IActionResult UpdateClientContactInformationInJson(string contactInformationJson)
-        // {
+        [HttpGet]
+        public IActionResult EditClientContactInformation(int id)
+        {
+            var contact = _clientService.GetClientContactInformationForEdit(id);
+            return new JsonResult(contact);
+        }
+        
+        [HttpPost]
+        public IActionResult EditClientContactInformation(NewClientContactInformationVm model)
+        {
+            if (ModelState.IsValid)
+            {
+                _clientService.UpdateClientContactInformation(model);
+            }
 
-        // }
-        // public IActionResult UpdateAddressInJson(string addressJson)
-        // {
+            return new JsonResult(model);
+        }
 
-        // }
+        [HttpGet]
+        public IActionResult EditAddress(int id)
+        {
+            var address = _clientService.GetAddressForEdit(id);
+            return new JsonResult(address);
+        }
+
+        [HttpPost]
+        public IActionResult EditAddress(NewAddressVm model)
+        {
+            if (ModelState.IsValid)
+            {
+                _clientService.UpdateAddress(model);
+            }
+
+            return new JsonResult(model);
+        }
+        
+        [HttpDelete]
+        public IActionResult DeleteClient(int clientId)
+        {
+            _clientService.DeleteClient(clientId);
+            return new JsonResult(clientId);
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteClientAbsolute(int clientId)
+        {
+            _clientService.DeleteClientAbsolute(clientId);
+            return new JsonResult(clientId);
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteClientContactInformation(int contactInformationId)
+        {
+            _clientService.DeleteClientContactInformation(contactInformationId);
+            return new JsonResult(contactInformationId);
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteAddress(int addressId)
+        {
+            _clientService.DeleteAddress(addressId);
+            return new JsonResult(addressId);
+        }       
     }
 }

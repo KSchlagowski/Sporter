@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Sporter.Application.Interfaces;
 using Sporter.Application.Services;
@@ -15,6 +16,7 @@ namespace Sporter.Application
             services.AddTransient<IItemService, ItemService>();
             services.AddTransient<IJsonService, JsonService>();
             services.AddTransient<IJsonValidator, JsonValidator>();
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             return services;
         }
