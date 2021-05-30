@@ -12,7 +12,6 @@ namespace Sporter.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddTransient<IClientService, ClientService>();
-            services.AddTransient<IClientJsonService, ClientJsonService>();
             services.AddTransient<IItemService, ItemService>();
             services.AddTransient<IJsonService, JsonService>();
             services.AddTransient<IJsonValidator, JsonValidator>();

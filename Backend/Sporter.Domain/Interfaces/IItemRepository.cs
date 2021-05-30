@@ -7,9 +7,9 @@ namespace Sporter.Domain.Interfaces
     {
         Item GetItemById(int itemId);
         Item GetItemByBuyerId(int buyerId);
-        IQueryable<Item> GetAllActiveItems();
+        IQueryable<Item> GetAllAvailableItems();
         IQueryable<Item> GetItemsByCategory(string category);
-        IQueryable<Item> GetItemsByCoutry(string country);
+        IQueryable<Item> GetItemsByCountry(string country);
         IQueryable<Item> GetItemsByCity(string city);
         IQueryable<Item> GetItemsBelowPrice(decimal maxPrice);
         IQueryable<Item> GetItemsAbovePrice(decimal minPrice);

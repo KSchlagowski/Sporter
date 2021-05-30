@@ -73,7 +73,7 @@ namespace Sporter.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddClientContactInformation(NewClientContactInformationVm model)
+        public IActionResult AddClientContactInformation([FromBody] NewClientContactInformationVm model)
         {
             var id = _clientService.AddClientContactInformation(model);
             return new JsonResult(id);
@@ -86,7 +86,7 @@ namespace Sporter.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddAddress(NewAddressVm model)
+        public IActionResult AddAddress([FromBody] NewAddressVm model)
         {
             var id = _clientService.AddAddress(model);
             return new JsonResult(id);
@@ -100,7 +100,7 @@ namespace Sporter.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditClient(NewClientVm model)
+        public IActionResult EditClient([FromBody] NewClientVm model)
         {
             if (ModelState.IsValid)
             {
@@ -118,7 +118,7 @@ namespace Sporter.API.Controllers
         }
         
         [HttpPost]
-        public IActionResult EditClientContactInformation(NewClientContactInformationVm model)
+        public IActionResult EditClientContactInformation([FromBody] NewClientContactInformationVm model)
         {
             if (ModelState.IsValid)
             {
@@ -136,7 +136,7 @@ namespace Sporter.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditAddress(NewAddressVm model)
+        public IActionResult EditAddress([FromBody] NewAddressVm model)
         {
             if (ModelState.IsValid)
             {

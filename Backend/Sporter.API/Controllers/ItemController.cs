@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Sporter.Application.Interfaces;
 using Sporter.Application.Services;
 using Sporter.Application.Validators.Json;
+using Sporter.Application.ViewModels.Item;
 using System.Web;
 
 namespace Sporter.API.Controllers
@@ -21,41 +22,111 @@ namespace Sporter.API.Controllers
         }
 
         [HttpGet]
-        public void Index() 
-        { 
-            _logger.LogInformation("I am in Index");
-        } 
-
-
-
-        [HttpGet]
-        public IActionResult GetItem()
+        public IActionResult GetItemById(int itemId)
         {
-            return new JsonResult(_itemService.GetJsonTEST());
+            var item = _itemService.GetItemById(itemId);
+            return new JsonResult(item);
         }
 
-        // [HttpGet]
-        // public IActionResult GetAllItems()
-        // {
-
-        //}
-
-
-
-        
-        //[Route("additem/{itemJson}")]
-        [HttpPost]
-        public int AddItem([FromHeader] string itemJson) 
-        { 
-            return _itemService.AddItemInJson(itemJson); 
-        } 
-
-        //Action for front-end developers
-        public IActionResult GetSampleJsonOfItem()
+        [HttpGet]
+        public IActionResult GetItemByBuyerId(int buyerId)
         {
-            var jsonService = new JsonService(new JsonValidator());
-            var json = jsonService.SerializeToJson(new Domain.Models.Item());
-            return new JsonResult(json);
+            var item = _itemService.GetItemByBuyerId(buyerId);
+            return new JsonResult(item);
+        }
+
+        [HttpGet]
+        public IActionResult GetAllItems()
+        {
+            var items = _itemService.GetAllItems();
+            return new JsonResult(items);
+        }
+
+        [HttpGet]
+        public IActionResult GetAllItems(int pageSize, int pageNo, string searchString)
+        {
+            var items = _itemService.GetAllItems(pageSize, pageNo, searchString);
+            return new JsonResult(items);
+        }
+
+        [HttpGet]
+        public IActionResult GetItemsByCategory(string category)
+        {
+            var items = _itemService.GetItemsByCategory(category);
+            return new JsonResult(items);
+        }
+
+        [HttpGet]
+        public IActionResult GetItemsByCountry(string country)
+        {
+            var items = _itemService.GetItemsByCountry(country);
+            return new JsonResult(items);
+        }
+
+        [HttpGet]
+        public IActionResult GetItemsByCity(string city)
+        {
+            var items = _itemService.GetItemsByCity(city);
+            return new JsonResult(items);
+        }
+
+        [HttpGet]
+        public IActionResult GetItemsBelowPrice(decimal maxPrice)
+        {
+            var items = _itemService.GetItemsBelowPrice(maxPrice);
+            return new JsonResult(items);
+        }
+    
+        [HttpGet]
+        public IActionResult GetItemsAbovePrice(decimal minPrice)
+        {
+            var items = _itemService.GetItemsAbovePrice(minPrice);
+            return new JsonResult(items);
+        }
+
+        [HttpGet]
+        public IActionResult AddItem()
+        {
+            return new JsonResult(new NewItemVm());
+        }
+
+        [HttpPost]
+        public IActionResult AddItem([FromBody] NewItemVm model)
+        {
+            int id = _itemService.AddItem(model);
+            return new JsonResult(id);
+        }
+
+        [HttpGet]
+        public IActionResult EditItem(int id)
+        {
+            var item = _itemService.GetItemById(id);
+            return new JsonResult(item);
+        }
+
+        [HttpPost]
+        public IActionResult EditItem([FromBody] NewItemVm model)
+        {
+            if (ModelState.IsValid)
+            {
+                _itemService.UpdateItem(model);
+            }
+
+            return new JsonResult(model);
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteItem(int itemId)
+        {
+            _itemService.DeleteItem(itemId);
+            return new JsonResult(itemId);
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteItemAbsolute(int itemId)
+        {
+            _itemService.DeleteItemAbsolute(itemId);
+            return new JsonResult(itemId);
         }
     }
 }
