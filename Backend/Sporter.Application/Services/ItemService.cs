@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Newtonsoft.Json.Linq;
 using Sporter.Application.Interfaces;
+using Sporter.Application.ViewModels.Item;
 using Sporter.Domain.Interfaces;
 using Sporter.Domain.Models;
 
@@ -10,31 +13,19 @@ namespace Sporter.Application.Services
     public class ItemService : IItemService
     {
         private readonly IItemRepository _itemRepo;
-        private readonly IJsonService _jsonService;
+        private readonly IMapper _mapper;
 
-        public ItemService(IItemRepository itemRepo, IJsonService jsonService)
+        public ItemService(IItemRepository itemRepo, IMapper mapper)
         {
             _itemRepo = itemRepo;
-            _jsonService = jsonService;
+            _mapper = mapper;
         }
 
-        public int AddItem(string itemJson)
+        public int AddItem(NewItemVm item)
         {
-            var item = _jsonService.DeserializeFromJson<Item>(itemJson);
-            return _itemRepo.AddItem(item);
+            throw new System.NotImplementedException();
         }
 
-        public int AddItem(Item item)
-        {
-            _itemRepo.AddItem(item);
-            return item.Id;
-        }
-
-        public int AddItemInJson(string itemJson)
-        {
-            var item = _jsonService.DeserializeFromJson<Item>(itemJson);
-            return AddItem(item);
-        }
 
         public void DeleteItem(int itemId)
         {
@@ -46,86 +37,88 @@ namespace Sporter.Application.Services
             _itemRepo.DeleteItemAbsolute(itemId);
         }
 
-        public List<Item> GetAllItems()
+        public void UpdateItem(NewItemVm itemVm)
         {
-            return _itemRepo.GetAllActiveItems().ToList();
+            var item = _mapper.Map<Item>(itemVm);
+            _itemRepo.UpdateItem(item);
         }
 
-        public List<Item> GetAllItems(int pageSize, int pageNo, string searchString)
+        public ListItemForListVm GetAllItems()
         {
-            var items = _itemRepo.GetAllActiveItems().Where(p => p.Name.StartsWith(searchString));
-            var itemsToShow = items.Skip(pageSize*(pageNo - 1)).Take(pageSize).ToList();
-
-            return itemsToShow;
-        }
-
-        public string GetAllItemsInJson()
-        {
-            return _jsonService.SerializeToJson(GetAllItems());
-        }
-
-        public string GetAllItemsInJson(int pageSize, int pageNo, string searchString)
-        {
-            return _jsonService.SerializeToJson(GetAllItems(pageSize, pageNo, searchString));
-        }
-
-        public Item GetItemByBuyerId(int buyerId)
-        {
-            return _itemRepo.GetItemByBuyerId(buyerId);
-        }
-
-        public Item GetItemById(int itemId)
-        {
-            return _itemRepo.GetItemById(itemId);
-        }
-
-        public IQueryable<Item> GetItemsAbovePrice(decimal minPrice)
-        {
-            return _itemRepo.GetItemsAbovePrice(minPrice);
-        }
-
-        public IQueryable<Item> GetItemsBelowPrice(decimal maxPrice)
-        {
-            return _itemRepo.GetItemsBelowPrice(maxPrice);
-        }
-
-        public IQueryable<Item> GetItemsByCategory(string category)
-        {
-            return _itemRepo.GetItemsByCategory(category);
-        }
-
-        public IQueryable<Item> GetItemsByCity(string city)
-        {
-            return _itemRepo.GetItemsByCity(city);
-        }
-
-        public IQueryable<Item> GetItemsByCoutry(string country)
-        {
-            return _itemRepo.GetItemsByCoutry(country);
-        }
-
-        public string GetJsonTEST()
-        {
-            Item item = new Item()
+            var items = _itemRepo.GetAllAvailableItems().ProjectTo<ItemForListVm>(_mapper.ConfigurationProvider).ToList();
+            var itemsList = new ListItemForListVm()
             {
-                Name = "Name",
-                Category = "cat",
-                Price = 2.0M,
-                Country = "Poland",
-                City = "Warsaw",
-                PublishDate = System.DateTime.Now,
-                ExpireDate = System.DateTime.Now,
-                BuyerId = 3,
-                IsAvailable = true
+                Items = items,
+                Count = items.Count()
             };
 
-
-            return _jsonService.SerializeToJson(item);
+            return itemsList;
         }
 
-        public int UpdateItem(Item item)
+        public ListItemForListVm GetAllItems(int pageSize, int pageNo, string searchString)
         {
-            throw new System.NotImplementedException();
+            var items = _itemRepo.GetAllAvailableItems().Where(p => p.Name.StartsWith(searchString))
+                .ProjectTo<ItemForListVm>(_mapper.ConfigurationProvider).ToList();
+            var itemsToShow = items.Skip(pageSize*(pageNo - 1)).Take(pageSize).ToList();
+            var itemsList = new ListItemForListVm()
+            {
+                PageSize = pageSize,
+                CurrentPage = pageNo,
+                SearchString = searchString,
+                Items = itemsToShow,
+                Count = items.Count
+            };
+
+            return itemsList;
+        }
+
+        public ItemForListVm GetItemByBuyerId(int buyerId)
+        {
+            var item = _itemRepo.GetItemByBuyerId(buyerId);
+            var itemVm = _mapper.Map<ItemForListVm>(item);
+            return itemVm;
+        }
+
+        public ItemForListVm GetItemById(int itemId)
+        {
+            var item = _itemRepo.GetItemById(itemId);
+            var itemVm = _mapper.Map<ItemForListVm>(item);
+            return itemVm;
+        }
+
+        public ListItemForListVm GetItemsAbovePrice(decimal minPrice)
+        {
+            var items = _itemRepo.GetItemsAbovePrice(minPrice);
+            var itemsVm = _mapper.Map<ListItemForListVm>(items);
+            return itemsVm;
+        }
+
+        public ListItemForListVm GetItemsByCategory(string category)
+        {
+            var items = _itemRepo.GetItemsByCategory(category);
+            var itemsVm = _mapper.Map<ListItemForListVm>(items);
+            return itemsVm;
+        }
+
+        public ListItemForListVm GetItemsByCountry(string country)
+        {
+            var items = _itemRepo.GetItemsByCountry(country);
+            var itemsVm = _mapper.Map<ListItemForListVm>(items);
+            return itemsVm;
+        }
+
+        public ListItemForListVm GetItemsByCity(string city)
+        {
+            var items = _itemRepo.GetItemsByCategory(city);
+            var itemsVm = _mapper.Map<ListItemForListVm>(items);
+            return itemsVm;
+        }
+
+        public ListItemForListVm GetItemsBelowPrice(decimal maxPrice)
+        {
+            var items = _itemRepo.GetItemsBelowPrice(maxPrice);
+            var itemsVm = _mapper.Map<ListItemForListVm>(items);
+            return itemsVm;
         }
     }
 }

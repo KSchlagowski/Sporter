@@ -38,7 +38,7 @@ namespace Sporter.Infrastructure.Repositories
             _context.SaveChanges();
         }
 
-        public IQueryable<Item> GetAllActiveItems() =>
+        public IQueryable<Item> GetAllAvailableItems() =>
             _context.Items.Where(i => i.IsAvailable);
 
         public Item GetItemByBuyerId(int buyerId) =>
@@ -59,7 +59,7 @@ namespace Sporter.Infrastructure.Repositories
         public IQueryable<Item> GetItemsByCity(string city) =>
             _context.Items.Where(i => i.City == city && i.IsAvailable);
 
-        public IQueryable<Item> GetItemsByCoutry(string country) =>
+        public IQueryable<Item> GetItemsByCountry(string country) =>
             _context.Items.Where(i => i.Country == country && i.IsAvailable);
 
         public void UpdateItem(Item item)

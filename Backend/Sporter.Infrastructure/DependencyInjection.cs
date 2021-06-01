@@ -8,7 +8,7 @@ namespace Sporter.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            // services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IClientRepository, ClientRepository>();
             services.AddTransient<IItemRepository, ItemRepository>();
 
             return services;
