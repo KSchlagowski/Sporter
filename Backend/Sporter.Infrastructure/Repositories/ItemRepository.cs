@@ -42,25 +42,25 @@ namespace Sporter.Infrastructure.Repositories
             _context.Items.Where(i => i.IsAvailable);
 
         public Item GetItemByBuyerId(int buyerId) =>
-            _context.Items.FirstOrDefault(i => i.BuyerId == buyerId && i.IsAvailable);
+            GetAllAvailableItems().FirstOrDefault(i => i.BuyerId == buyerId);
 
         public Item GetItemById(int itemId) =>
-            _context.Items.FirstOrDefault(i => i.Id == itemId && i.IsAvailable);
+            GetAllAvailableItems().FirstOrDefault(i => i.Id == itemId);
 
         public IQueryable<Item> GetItemsAbovePrice(decimal minPrice) =>
-            _context.Items.Where(i => i.Price > minPrice && i.IsAvailable);
+            GetAllAvailableItems().Where(i => i.Price >= minPrice);
 
         public IQueryable<Item> GetItemsBelowPrice(decimal maxPrice) =>
-            _context.Items.Where(i => i.Price < maxPrice && i.IsAvailable);
+            GetAllAvailableItems().Where(i => i.Price <= maxPrice);
 
         public IQueryable<Item> GetItemsByCategory(string category) =>
-            _context.Items.Where(i => i.Category == category && i.IsAvailable);
+            GetAllAvailableItems().Where(i => i.Category == category);
 
         public IQueryable<Item> GetItemsByCity(string city) =>
-            _context.Items.Where(i => i.City == city && i.IsAvailable);
+            GetAllAvailableItems().Where(i => i.City == city);
 
         public IQueryable<Item> GetItemsByCountry(string country) =>
-            _context.Items.Where(i => i.Country == country && i.IsAvailable);
+            GetAllAvailableItems().Where(i => i.Country == country);
 
         public void UpdateItem(Item item)
         {
