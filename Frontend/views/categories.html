@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cathegories</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+
+<body>
+    <header>
+        <main>
+            <div class="header-left">
+                <select name="language" disabled>
+                    <option value="">english</option>
+                    <option value="">polish</option>
+                    <option value="">german</option>
+                    <option value="">french</option>
+                </select>
+                <select name="currency" disabled>
+                    <option value="">usd</option>
+                    <option value="">pln</option>
+                    <option value="">eur</option>
+                    <option value="">bol</option>
+                </select>
+            </div>
+            <div class="logo">SPORTER</div>
+            <div class="header-right">
+                <div class="hri">
+                    <img onclick="openCart()" src="../public/img/shopping-cart.png" alt="">
+                    <p id="cart" onclick="openCart()">Cart</p>
+                    <div id="cart-open">
+                        <div class="cart-list">
+                            <div class="list-item">
+                                <div class="list-title"></div>
+                                <div class="list-price"></div>
+                            </div>
+                        </div>
+                        <div class="total">
+                            <p class="list-total">Total: </p>
+                            <a class="cart-link" href="/cart"><button class="btn-red">Go to cart</button></a>
+                        </div>
+            
+                    </div>
+                </div>
+                <div class="hri">
+                    <img src="../public/img/user.png" alt="">
+                    <a href="/profile" id="profile">Profile</a>
+                </div>
+                <div class="hri">
+                    <img onclick="openSearch()" src="../public/img/search.png" alt="" id="">
+                    <form action="/search" method="GET">
+                        <input type="text" id="input-search" placeholder="Search...">
+                    </form>
+                    <p onclick="openSearch()" id="search-p">Search</p>
+                </div>
+            </div>
+        </main>
+        <nav>
+            <a href="index.html">HOME</a>
+            <a href="categories.html">CATEGORIES</a>
+            <a href="contact.html">CONTACT</a>
+            <a href="about.html">ABOUT US</a>
+        </nav>
+    </header>
+
+
+    <footer>
+        <section class="fo-left">
+            <p><a href="/sign-up">Sign Up</a></p>
+            <p><a href="/about">About</a></p>
+            <p>© 2021 Krzysztof Białk</p>
+            <p>Icons made by <a href="https://www.flaticon.com/authors/royyan-wijaya" title="Royyan Wijaya">Royyan Wijaya</a> from
+                <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+            </p>
+        </section>
+        <section class="fo-right">
+            <p><a href="/contact">Contact</a></p>
+            <p><a href="/privacy">Privacy</a></p>
+            <p><a href="/terms-and-conditions">Terms and Conditions</a></p>
+        </section>
+    </footer>
+    <script src="../public/js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+
+<body>
+    <header>
+        <main>
+            <div class="header-left">
+                <select name="language" disabled>
+                    <option value="">english</option>
+                    <option value="">polish</option>
+                    <option value="">german</option>
+                    <option value="">french</option>
+                </select>
+                <select name="currency" disabled>
+                    <option value="">usd</option>
+                    <option value="">pln</option>
+                    <option value="">eur</option>
+                    <option value="">bol</option>
+                </select>
+            </div>
+            <div class="logo">SPORTER</div>
+            <div class="header-right">
+                <div class="hri">
+                    <img onclick="openCart()" src="../public/img/shopping-cart.png" alt="">
+                    <p id="cart" onclick="openCart()">Cart</p>
+                    <div id="cart-open">
+                        <div class="cart-list">
+                            <div class="list-item">
+                                <div class="list-title"></div>
+                                <div class="list-price"></div>
+                            </div>
+                        </div>
+                        <div class="total">
+                            <p class="list-total">Total: </p>
+                            <a class="cart-link" href="/cart"><button class="btn-red">Go to cart</button></a>
+                        </div>
+            
+                    </div>
+                </div>
+                <div class="hri">
+                    <img src="../public/img/user.png" alt="">
+                    <a href="/profile" id="profile">Profile</a>
+                </div>
+                <div class="hri">
+                    <img onclick="openSearch()" src="../public/img/search.png" alt="" id="">
+                    <form action="/search" method="GET">
+                        <input type="text" id="input-search" placeholder="Search...">
+                    </form>
+                    <p onclick="openSearch()" id="search-p">Search</p>
+                </div>
+            </div>
+        </main>
+        <nav>
+            <a href="index.html">HOME</a>
+            <a href="categories.html">CATEGORIES</a>
+            <a href="contact.html">CONTACT</a>
+            <a href="about.html">ABOUT US</a>
+        </nav>
+    </header>
+    <main class="contact-main">
+        <section class="con-left">
+            <h3 class="con-h3">Get in touch</h3>
+            <div class="con-inf">
+                <img src="../public/img/email.png" alt=""><p>E-mail: <a href="mailto:contact@sporter.com"><b>contact@sporter.com</b></a></p>
+            </div>
+            <div class="con-inf">
+                <img src="../public/img/telephone.png" alt=""><p>Telephone: <a href="tel:+48123456789"><b>+48 123 456 789</b></a></p>
+            </div>
+            <div class="con-inf">
+                <img src="../public/img/address.png" alt=""><p>Address: <b>Starowiejska 19, 81-363 Gdynia</b></p>
+            </div>
+            <h3 class="con-h3">Or by form below:</h3>
+            <form action="/contact" method="POST" class="con-form">
+                <p>Your E-mail</p>
+                <input type="email" class="con-email" placeholder="E-mail">
+                <p>Message</p>
+                <textarea name="" id="" cols="30" rows="10" placeholder="Message"></textarea>
+                <button type="submit" class="btn-red btn-con">Send!</button>
+            </form>
+        </section>
+        <section class="con-map">
+            <h3 class="con-h3">We are here</h3>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1157.8509460791163!2d18.537468068669554!3d54.52111861198718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46fda724f50c5fd5%3A0x895d1bb1de394231!2sVenus%20Sex%20Shop%20-%20Gdynia%20%C5%9Ar%C3%B3dmie%C5%9Bcie!5e0!3m2!1spl!2spl!4v1634662951685!5m2!1spl!2spl"
+            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </section>
+    </main>
+    <footer>
+        <section class="fo-left">
+            <p><a href="/sign-up">Sign Up</a></p>
+            <p><a href="/about">About</a></p>
+            <p>© 2021 Krzysztof Białk</p>
+            <p>Icons made by <a href="https://www.flaticon.com/authors/royyan-wijaya" title="Royyan Wijaya">Royyan Wijaya</a> from
+                <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+            </p>
+        </section>
+        <section class="fo-right">
+            <p><a href="/contact">Contact</a></p>
+            <p><a href="/privacy">Privacy</a></p>
+            <p><a href="/terms-and-conditions">Terms and Conditions</a></p>
+        </section>
+    </footer>
+    <script src="../public/js/script.js"></script>
+</body>
+
+</html>
