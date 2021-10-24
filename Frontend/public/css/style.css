@@ -41,6 +41,7 @@ header main {
     align-items: center;
     margin: 0 10px 0 0;
     min-height: 60px;
+    cursor: pointer;
 }
 .hri img {
     padding: 0 5px 0 0;
@@ -96,21 +97,21 @@ header nav {
 }
 #cart-open {
     display: none;
-    width: 300px;
-    height: 190px;
+    width: 400px;
+    height: 200px;
     position: absolute;
-    top: 80px;
+    top: 70px;
     background: white;
     border-radius: 10px;
     border: 2px solid rgba(50,50,50, 0.2);
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    cursor: auto;
 }
 .cart-list {
-    padding: 10px 10px 10px 10px;
-    height: 135px;
-    width: 290px;
+    height: 140px;
+    width: 390px;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
@@ -119,12 +120,26 @@ header nav {
 .total {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
 }
 .list-item {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    /* margin: 10px 0 10px 0; */
+    /* background-color: rgb(236, 236, 236); */
+    padding: 10px 0 10px 0;
+    border-bottom: 1px solid black;
+}
+.list-item:last-child {
+    border-bottom: none;
 }
 .list-title {
+    margin: 0 10px 0 0;
+    padding: 0 0 0 10px;
+}
+.list-price {
     margin: 0 10px 0 0;
 }
 .list-total {
@@ -144,15 +159,15 @@ header nav {
     display: flex;
     flex-direction: row;
 }
-.gender-men, .gender-women {
-    width: 50%;
-    height: 300px;
+.gender-men, .gender-women, .gender-kids {
+    width: 33.333%;
+    height: 250px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
 }
-.gender-men:before, .gender-women:before {
+.gender-men:before, .gender-women:before, .gender-kids:before {
     content: "";
     opacity: .6;
     position: absolute;
@@ -170,6 +185,9 @@ header nav {
 }
 .gender-women:before {
     background-image: url(../img/women.jpg);
+}
+.gender-kids:before {
+    background-image: url(../img/gen-kids.jpg);
 }
 .gender-p {
     font-size: 3.5rem;
@@ -367,7 +385,7 @@ li a {
     flex-direction: column;
 }
 .desc-desc {
-    height: 130px;
+    height: auto;
     width: 80%;
     background: whitesmoke;
     border-radius: 20px;
@@ -376,10 +394,13 @@ li a {
     flex-direction: column;
 }
 .desc-desc-title {
-    height: 25px;
+    min-height: 25px;
+    text-align: center;
+    padding: 10px 0 0 0;
 }
 .desc-desc-desc {
-    height: 80px;
+    min-height: 80px;
+    text-align: justify;
 }
 .deal-check {
     height: 100px;
@@ -666,7 +687,7 @@ textarea {
     margin: 0 10px 10px 0;
     cursor: pointer;
 }
-.total {
+.item-total {
     display: flex;
     flex-direction: row;
     align-items: center;

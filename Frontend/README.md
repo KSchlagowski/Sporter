@@ -7,6 +7,7 @@
 - 19.10.21 - Added some of the pages; index page almost ready
 - 19.10.21 - Main part of work is done; added some script
 - 23.10.21 - Added item page
+- 24.10.21 - Little work on cart
 
 ## To-Do
 
