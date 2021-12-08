@@ -82,7 +82,7 @@ namespace Sporter.API.Controllers
         [HttpGet]
         public IActionResult AddAddress()
         {
-            return View(new NewAddressVm());
+            return new JsonResult(new NewAddressVm());
         }
 
         [HttpPost]
