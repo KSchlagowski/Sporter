@@ -4,6 +4,7 @@ using Sporter.Application.Interfaces;
 using Sporter.Application.Services;
 using Sporter.Application.Validators.Json;
 using Sporter.Application.ViewModels.Client;
+using Sporter.Domain.Models;
 using System.Web;
 
 namespace Sporter.API.Controllers
@@ -82,7 +83,7 @@ namespace Sporter.API.Controllers
         [HttpGet]
         public IActionResult AddAddress()
         {
-            return View(new NewAddressVm());
+            return new JsonResult(new NewAddressVm());
         }
 
         [HttpPost]
