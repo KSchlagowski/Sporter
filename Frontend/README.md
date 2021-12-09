@@ -8,6 +8,7 @@
 - 19.10.21 - Main part of work is done; added some script
 - 23.10.21 - Added item page
 - 24.10.21 - Little work on cart
+- 09.12.21 - reorganised frontend (ejs, express)
 
 ## To-Do
 
