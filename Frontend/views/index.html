@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sporter</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+<body>
+    <header>
+        <main>
+            <div class="header-left">
+                <select name="language" disabled>
+                    <option value="">english</option>
+                    <option value="">polish</option>
+                    <option value="">german</option>
+                    <option value="">french</option>
+                </select>
+                <select name="currency" disabled>
+                    <option value="">usd</option>
+                    <option value="">pln</option>
+                    <option value="">eur</option>
+                    <option value="">bol</option>
+                </select>
+            </div>
+            <div class="logo">SPORTER</div>
+            <div class="header-right">
+                <div class="hri">
+                    <img onclick="openCart()" src="../public/img/shopping-cart.png" alt="">
+                    <p id="cart" onclick="openCart()">Cart</p>
+                    <div id="cart-open">
+                        <div class="cart-list">
+                            <div class="list-item">
+                                <div class="list-title">Sweater</div>
+                                <div class="list-price">29,99USD</div>
+                            </div>
+                            <div class="list-item">
+                                <div class="list-title">Sweater</div>
+                                <div class="list-price">39,99USD</div>
+                            </div>
+                            <div class="list-item">
+                                <div class="list-title">Sweater</div>
+                                <div class="list-price">39,99USD</div>
+                            </div>
+                            <div class="list-item">
+                                <div class="list-title">Sweater</div>
+                                <div class="list-price">39,99USD</div>
+                            </div>
+                            <div class="list-item">
+                                <div class="list-title">Sweater</div>
+                                <div class="list-price">39,99USD</div>
+                            </div>
+                        </div>
+                        <div class="total">
+                            <a href="/cart"><button class="btn-red">Go to cart</button></a>
+                            <p class="list-total">Total: </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hri">
+                    <img src="../public/img/user.png" alt="">
+                    <a href="/profile" id="profile">Profile</a>
+                </div>
+                <div class="hri">
+                    <img onclick="openSearch()" src="../public/img/search.png" alt="" id="">
+                    <form action="/search" method="GET">
+                        <input type="text" id="input-search" placeholder="Search...">   
+                    </form>
+                    <p onclick="openSearch()" id="search-p">Search</p>
+                </div>
+            </div>
+        </main>
+        <nav>
+            <a href="index.html">HOME</a>
+            <a href="categories.html">CATEGORIES</a>
+            <a href="contact.html">CONTACT</a>
+            <a href="about.html">ABOUT US</a>
+        </nav>
+    </header>
+    <section class="underheader">
+        <section class="userinfo">
+            <div class="sect brd">
+                <div class="sect-left">
+                    <img src="../public/img/delivery.png" alt="logo">
+                </div>
+                <div class="sect-right">
+                    <div class="sect-title">
+                        FREE SHIPPING
+                    </div>
+                    <div class="sect-desc">
+                        For orders over $50
+                    </div>
+                </div>
+            </div>
+            <div class="sect brd">
+                <div class="sect-left">
+                    <img src="../public/img/support.png" alt="logo">
+                </div>
+                <div class="sect-right">
+                    <div class="sect-title">
+                        CLIENT SUPPORT
+                    </div>
+                    <div class="sect-desc">
+                        Avaiable 24/7
+                    </div>
+                </div>
+            </div>
+            <div class="sect">
+                <div class="sect-left">
+                    <img src="../public/img/return.png" alt="logo">
+                </div>
+                <div class="sect-right">
+                    <div class="sect-title">
+                        RETURNS
+                    </div>
+                    <div class="sect-desc">
+                        One month free
+                    </div>
+                </div>
+            </div>
+        </section>
+        <article class="gendermain">
+            <section class="gender-men">
+                <p class="gender-p"><a href="/categories">MEN</a></p>
+            </section>
+            <section class="gender-women">
+                <p class="gender-p"><a href="/categories">WOMEN</a></p>
+            </section>
+            <section class="gender-kids">
+                <p class="gender-p"><a href="/categories">KIDS</a></p>
+            </section>
+        </article>
+    </section>
+    <main>
+        <section class="popular">
+            <div class="pop-title">
+                <h2>TOP ITEMS</h2>
+            </div>
+            <div class="top-items">
+                <ul>
+                    <li>
+                        <a href="/views/item.html">
+                            <div class="top-item">
+                                <div class="item-bg">
+                                    <img src="../public/img/img-ph.png" alt="">
+                                </div>
+                                <div class="item-title">
+                                    <span>Sweater</span>
+                                </div>
+                                <div class="item-price">
+                                    <span class="price-onsale">23,99USD</span>
+                                    <span class="price-normal">39,99USD</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/views/item.html">
+                            <div class="top-item">
+                                <div class="item-bg">
+                                    <img src="../public/img/img-ph.png" alt="">
+                                </div>
+                                <div class="item-title">
+                                    <span>Sweater</span>
+                                </div>
+                                <div class="item-price">
+                                    <span class="price-onsale">23,99USD</span>
+                                    <span class="price-normal">39,99USD</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/views/item.html">
+                            <div class="top-item">
+                                <div class="item-bg">
+                                    <img src="../public/img/img-ph.png" alt="">
+                                </div>
+                                <div class="item-title">
+                                    <span>Sweater</span>
+                                </div>
+                                <div class="item-price">
+                                    <span class="price-onsale">23,99USD</span>
+                                    <span class="price-normal">39,99USD</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/views/item.html">
+                            <div class="top-item">
+                                <div class="item-bg">
+                                    <img src="../public/img/img-ph.png" alt="">
+                                </div>
+                                <div class="item-title">
+                                    <span>Sweater</span>
+                                </div>
+                                <div class="item-price">
+                                    <span class="price-onsale">23,99USD</span>
+                                    <span class="price-normal">39,99USD</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/views/item.html">
+                            <div class="top-item">
+                                <div class="item-bg">
+                                    <img src="../public/img/img-ph.png" alt="">
+                                </div>
+                                <div class="item-title">
+                                    <span>Sweater</span>
+                                </div>
+                                <div class="item-price">
+                                    <span class="price-onsale">23,99USD</span>
+                                    <span class="price-normal">39,99USD</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/views/item.html">
+                            <div class="top-item">
+                                <div class="item-bg">
+                                    <img src="../public/img/img-ph.png" alt="">
+                                </div>
+                                <div class="item-title">
+                                    <span>Sweater</span>
+                                </div>
+                                <div class="item-price">
+                                    <span class="price-onsale">23,99USD</span>
+                                    <span class="price-normal">39,99USD</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/views/item.html">
+                            <div class="top-item">
+                                <div class="item-bg">
+                                    <img src="../public/img/img-ph.png" alt="">
+                                </div>
+                                <div class="item-title">
+                                    <span>Sweater</span>
+                                </div>
+                                <div class="item-price">
+                                    <span class="price-onsale">23,99USD</span>
+                                    <span class="price-normal">39,99USD</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/views/item.html">
+                            <div class="top-item">
+                                <div class="item-bg">
+                                    <img src="../public/img/img-ph.png" alt="">
+                                </div>
+                                <div class="item-title">
+                                    <span>Sweater</span>
+                                </div>
+                                <div class="item-price">
+                                    <span class="price-onsale">23,99USD</span>
+                                    <span class="price-normal">39,99USD</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/views/item.html">
+                            <div class="top-item">
+                                <div class="item-bg">
+                                    <img src="../public/img/img-ph.png" alt="">
+                                </div>
+                                <div class="item-title">
+                                    <span>Sweater</span>
+                                </div>
+                                <div class="item-price">
+                                    <span class="price-price">39,99USD</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/views/item.html">
+                            <div class="top-item">
+                                <div class="item-bg">
+                                    <img src="../public/img/img-ph.png" alt="">
+                                </div>
+                                <div class="item-title">
+                                    <span>Sweater</span>
+                                </div>
+                                <div class="item-price">
+                                    <span class="price-price">39,99USD</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/views/item.html">
+                            <div class="top-item">
+                                <div class="item-bg">
+                                    <img src="../public/img/img-ph.png" alt="">
+                                </div>
+                                <div class="item-title">
+                                    <span>Sweater</span>
+                                </div>
+                                <div class="item-price">
+                                    <span class="price-price">39,99USD</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/views/item.html">
+                            <div class="top-item">
+                                <div class="item-bg">
+                                    <img src="../public/img/img-ph.png" alt="">
+                                </div>
+                                <div class="item-title">
+                                    <span>Sweater</span>
+                                </div>
+                                <div class="item-price">
+                                    <span class="price-price">39,99USD</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="deal">
+            <div class="deal-left">
+                <img src="../public/img/img-ph.png" alt="img">
+            </div>
+            <div class="deal-right">
+                <div class="deal-title">
+                    Deal Of The Week
+                </div>
+                <div class="deal-desc">
+                    <div class="desc-desc">
+                        <h3 class="desc-desc-title">
+                            Koszuleczka pipeczka
+                        </h3>
+                        <p class="desc-desc-desc">
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio quisquam ratione et
+                        </p>
+                    </div>
+                </div>
+                <div class="deal-check">
+                    <a href="#"><button class="btn">CHECK OUT NOW</button></a>
+                </div>
+            </div>
+        </section>
+        <section class="newsletter">
+            <div class="nl-left">
+                <h3>Newsletter</h3>
+                <p>Sign up for newsletter to get cupons on our products</p>
+            </div>
+            <div class="nl-right">
+                <form action="/index/newsletter" method="POST">
+                    <input class="input-sign" type="text" placeholder="Your e-mail">
+                    <button class="btn-red">SIGN UP!</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <section class="fo-left">
+            <p><a href="/sign-up">Sign Up</a></p>
+            <p><a href="/about">About</a></p>
+            <p>© 2021 Krzysztof Białk</p>
+            <p>Icons made by <a href="https://www.flaticon.com/authors/royyan-wijaya" title="Royyan Wijaya">Royyan Wijaya</a> from
+                <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
+        </section>
+        <section class="fo-right">
+            <p><a href="/contact">Contact</a></p>
+            <p><a href="/privacy">Privacy</a></p>
+            <p><a href="/terms-and-conditions">Terms and Conditions</a></p>
+        </section>
+    </footer>
+    <script src="../public/js/script.js"></script>
+</body>
+</html>
