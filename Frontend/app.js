@@ -5,7 +5,8 @@ const express = require('express'),
     dotenv = require('dotenv'),
     path = require('path'),
     cors = require('cors'),
-    index = require('./routes/index');
+    index = require('./routes/index'),
+    bodyParser = require('body-parser');
 
 dotenv.config({ path: './config/config.env' });
 app.engine('ejs', ejsMate);
@@ -14,6 +15,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
 app.use(cors());
 app.use((req, res, next) => { next() });
 app.use('/', index)
