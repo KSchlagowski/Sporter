@@ -1,0 +1,70 @@
+<header>
+    <main>
+        <div class="header-left">
+            <select name="language" disabled>
+                <option value="">english</option>
+                <option value="">polish</option>
+                <option value="">german</option>
+                <option value="">french</option>
+            </select>
+            <select name="currency" disabled>
+                <option value="">usd</option>
+                <option value="">pln</option>
+                <option value="">eur</option>
+                <option value="">bol</option>
+            </select>
+        </div>
+        <div class="logo">SPORTER</div>
+        <div class="header-right">
+            <div class="hri">
+                <img onclick="openCart()" src="/img/shopping-cart.png" alt="">
+                <p id="cart" onclick="openCart()">Cart</p>
+                <div id="cart-open">
+                    <div class="cart-list">
+                        <div class="list-item">
+                            <div class="list-title">Sweater</div>
+                            <div class="list-price">29,99USD</div>
+                        </div>
+                        <div class="list-item">
+                            <div class="list-title">Sweater</div>
+                            <div class="list-price">39,99USD</div>
+                        </div>
+                        <div class="list-item">
+                            <div class="list-title">Sweater</div>
+                            <div class="list-price">39,99USD</div>
+                        </div>
+                        <div class="list-item">
+                            <div class="list-title">Sweater</div>
+                            <div class="list-price">39,99USD</div>
+                        </div>
+                        <div class="list-item">
+                            <div class="list-title">Sweater</div>
+                            <div class="list-price">39,99USD</div>
+                        </div>
+                    </div>
+                    <div class="total">
+                        <a href="/cart"><button class="btn-red">Go to cart</button></a>
+                        <p class="list-total">Total: </p>
+                    </div>
+                </div>
+            </div>
+            <div class="hri">
+                <img src="/img/user.png" alt="">
+                <a href="/profile" id="profile">Profile</a>
+            </div>
+            <div class="hri">
+                <img onclick="openSearch()" src="/img/search.png" alt="" id="">
+                <form action="/search" method="GET">
+                    <input type="text" id="input-search" placeholder="Search...">
+                </form>
+                <p onclick="openSearch()" id="search-p">Search</p>
+            </div>
+        </div>
+    </main>
+    <nav>
+        <a href="/">HOME</a>
+        <a href="/categories">CATEGORIES</a>
+        <a href="/contact">CONTACT</a>
+        <a href="/about">ABOUT US</a>
+    </nav>
+</header>

@@ -1,0 +1,33 @@
+<% layout('layouts/boilerplate') %>
+
+    <main class="contact-main">
+        <section class="con-left">
+            <h3 class="con-h3">Get in touch</h3>
+            <div class="con-inf">
+                <img src="/img/email.png" alt="">
+                <p>E-mail: <a href="mailto:contact@sporter.com"><b>contact@sporter.com</b></a></p>
+            </div>
+            <div class="con-inf">
+                <img src="/img/telephone.png" alt="">
+                <p>Telephone: <a href="tel:+48123456789"><b>+48 123 456 789</b></a></p>
+            </div>
+            <div class="con-inf">
+                <img src="/img/address.png" alt="">
+                <p>Address: <b>Starowiejska 19, 81-363 Gdynia</b></p>
+            </div>
+            <h3 class="con-h3">Or by form below:</h3>
+            <form action="/contact" method="POST" class="con-form">
+                <p>Your E-mail</p>
+                <input type="email" class="con-email" placeholder="E-mail">
+                <p>Message</p>
+                <textarea name="" id="" cols="30" rows="10" placeholder="Message"></textarea>
+                <button type="submit" class="btn-red btn-con">Send!</button>
+            </form>
+        </section>
+        <section class="con-map">
+            <h3 class="con-h3">We are here</h3>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1157.8509460791163!2d18.537468068669554!3d54.52111861198718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46fda724f50c5fd5%3A0x895d1bb1de394231!2sVenus%20Sex%20Shop%20-%20Gdynia%20%C5%9Ar%C3%B3dmie%C5%9Bcie!5e0!3m2!1spl!2spl!4v1634662951685!5m2!1spl!2spl"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </section>
+    </main>
