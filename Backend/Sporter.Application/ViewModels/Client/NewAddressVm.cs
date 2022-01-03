@@ -15,7 +15,8 @@ namespace Sporter.Application.ViewModels.Client
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<NewAddressVm, Sporter.Domain.Models.Address>();
+            profile.CreateMap<NewAddressVm, Sporter.Domain.Models.Address>()
+                .ReverseMap();
         }
     }
 }
