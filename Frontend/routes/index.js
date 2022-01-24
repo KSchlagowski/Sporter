@@ -5,7 +5,7 @@ const router = require('express').Router(),
 /* INDEX */
 
 router.get('/', async (req, res, next) => {
-    await axios.get('http://localhost:5000/Item/GetAllItems')
+    await axios.get('http://localhost:5000/Client/AddClient')
         .then(data => {
             res.render('index', {
                 data: JSON.parse(CircularJSON.stringify(data.data)),
